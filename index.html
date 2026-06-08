@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KubarkULTRA</title>
+    <style>
+        /* Import a stark, typewriter courier font to mimic 1960s tech */
+        @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@700&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #0d0d0d; /* Dark vignette border */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        /* The Photocopy Document Canvas */
+        .document-canvas {
+            width: 100%;
+            max-width: 1000px;
+            aspect-ratio: 16 / 9;
+            background-color: #e2e1dd; /* Vintage aged paper hue */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.4), 0 20px 50px rgba(0,0,0,0.8);
+            border-radius: 4px;
+            border: 1px solid #c5c3be;
+            
+            /* CSS Gradients to mimic the subtle atmospheric stains, grain, and folds */
+            background-image: 
+                radial-gradient(circle at 85% 85%, rgba(0, 0, 0, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 15% 15%, rgba(255, 255, 255, 0.4) 0%, transparent 50%),
+                linear-gradient(to right, rgba(0,0,0,0.03) 0%, transparent 10%, transparent 90%, rgba(0,0,0,0.03) 100%);
+        }
+
+        /* Subtle vertical photocopy smudge textures on the paper margins */
+        .document-canvas::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 10%;
+            bottom: 0;
+            width: 45px;
+            background: linear-gradient(to right, transparent, rgba(0,0,0,0.04) 30%, rgba(0,0,0,0.08) 50%, rgba(0,0,0,0.03) 70%, transparent);
+            filter: blur(4px);
+            pointer-events: none;
+        }
+
+        .document-canvas::after {
+            content: '';
+            position: absolute;
+            bottom: 5%;
+            left: 20%;
+            width: 300px;
+            height: 12px;
+            background: rgba(0, 0, 0, 0.06);
+            filter: blur(6px);
+            transform: rotate(-1deg);
+            pointer-events: none;
+        }
+
+        /* The central, high-contrast text element */
+        h1 {
+            font-family: 'Courier Prime', 'Courier New', Courier, monospace;
+            font-size: clamp(2.5rem, 6vw, 5.5rem); /* Dynamic resizing */
+            color: #111111;
+            font-weight: 700;
+            letter-spacing: 2px;
+            user-select: none;
+            position: relative;
+            
+            /* Slight bleed/blur mimicking wet ribbon ink on paper fibers */
+            text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.8), -0.5px -0.5px 0px rgba(0,0,0,0.3);
+            filter: contrast(180%) blur(0.3px);
+            opacity: 0.92;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Replicating the stark visual profile of watermarked_img_5158360398786625533.png -->
+    <div class="document-canvas">
+        <h1>KubarkULTRA</h1>
+    </div>
+
+</body>
+</html>
