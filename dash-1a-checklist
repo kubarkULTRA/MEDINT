@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DASH-1A Interactive Checklist</title>
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --text-primary: #111111;
+            --text-muted: #666666;
+            --accent-blue: #003366;
+            --accent-hover: #004080;
+            --border-color: #e0e0e0;
+            --card-radius: 8px;
+            --bg-checked: #f4f7fa;
+            --alert-bg: #fff5f5;
+            --alert-border: #feb2b2;
+            --alert-text: #c53030;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .wrapper {
+            width: 100%;
+            max-width: 680px;
+            margin-bottom: 60px;
+        }
+
+        header {
+            border-bottom: 2px solid var(--text-primary);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        .brand-header {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            line-height: 1.1;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+        }
+
+        h2 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .section {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: var(--card-radius);
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .domain-group {
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--card-radius);
+            overflow: hidden;
+        }
+
+        .domain-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .domain-header {
+            background-color: #fafafa;
+            padding: 8px 15px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border-color);
+            letter-spacing: 0.5px;
+        }
+
+        .interactive-row {
+            display: flex;
+            align-items: flex-start;
+            padding: 16px 15px;
+            border-bottom: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .domain-group .interactive-row:last-child {
+            border-bottom: none;
+        }
+
+        .interactive-row:hover {
+            background-color: #fafafa;
+        }
+
+        .interactive-row.checked {
+            background-color: var(--bg-checked);
+        }
+
+        .checkbox-wrapper {
+            margin-top: 2px;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .custom-checkbox {
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--text-muted);
+            border-radius: 6px;
+            display: inline-block;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .interactive-row.checked .custom-checkbox {
+            background-color: var(--accent-blue);
+            border-color: var(--accent-blue);
+        }
+
+        .interactive-row.checked .custom-checkbox::after {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 2px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        .item-content {
+            flex-grow: 1;
+        }
+
+        .hop-row-split {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            width: 100%;
+        }
+
+        .hop-list-right {
+            list-style-type: none;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            padding-left: 0;
+            text-align: left;
+            white-space: nowrap;
+            align-self: flex-start;
+            margin-top: 18px;
+        }
+
+        .interactive-row.checked .hop-list-right {
+            color: var(--accent-blue);
+        }
+
+        .call-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        .item-text {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            display: block;
+        }
+
+        .response-container {
+            margin-top: 10px;
+        }
+
+        .response-text {
+            display: inline-block;
+            background: #f0f0f0;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .interactive-row.checked .response-text {
+            background: #e1ebf5;
+            color: var(--accent-blue);
+        }
+
+        .critical-thresholds {
+            background-color: var(--alert-bg);
+            border: 1px solid var(--alert-border);
+            border-radius: var(--card-radius);
+            padding: 15px 20px;
+            margin-bottom: 25px;
+        }
+
+        .critical-thresholds h3 {
+            color: var(--alert-text);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 800;
+            margin-bottom: 2px;
+        }
+
+        .critical-thresholds p {
+            color: var(--alert-text);
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .transition-divider {
+            background-color: var(--accent-blue);
+            color: #ffffff;
+            text-align: center;
+            font-weight: 800;
+            font-size: 1.1rem;
+            letter-spacing: 1.5px;
+            padding: 12px 20px;
+            border-radius: var(--card-radius);
+            margin-bottom: 25px;
+            text-transform: uppercase;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-blue);
+            color: #ffffff;
+            border: none;
+            flex: 2;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            flex: 1;
+        }
+
+        .btn-secondary:hover {
+            background-color: #fafafa;
+            border-color: var(--text-muted);
+        }
+
+        footer {
+            margin-top: 50px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        .brand-footer {
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 500px) {
+            .hop-row-split {
+                flex-direction: column;
+                gap: 5px;
+            }
+            .hop-list-right {
+                align-self: flex-start;
+                margin-top: 5px;
+                padding-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <header>
+            <div class="brand-header">ResusLogix</div>
+            <h1>DASH-1A Checklist</h1>
+        </header>
+
+        <!-- CRITICAL THRESHOLDS BOX -->
+        <div class="critical-thresholds">
+            <h3>DASH-1A</h3>
+            <p>Definitive Airway sanz Hypercapnia, Hypoxemia, Hypotension</p>
+        </div>
+
+        <!-- SECTION 1: AIRWAY READY CHECK -->
+        <div class="section" id="airway-ready-section">
+            <h2>1. Airway Ready Check</h2>
+            
+            <div class="domain-group">
+                <div class="domain-header">Airway Preparation</div>
+                
+                <div class="interactive-row" onclick="toggleRow(this)">
+                    <div class="checkbox-wrapper"><span class="custom-checkbox"></span></div>
+                    <div class="item-content">
+                        <div class="hop-row-split">
+                            <div>
+                                <span class="call-label">Operator</span>
+                                <span class="item-text">CONFIRM... HOP OPTIMIZED?</span>
+                                <div class="response-container">
+                                    <span class="response-text">Optimized</span>
+                                </div>
+                            </div>
+                            <ul class="hop-list-right">
+                                <li>H+ ion (acidosis)</li>
+                                <li>Oxygen (hypoxemia)</li>
+                                <li>Pressure (hypotension)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="interactive-row" onclick="toggleRow(this)">
+                    <div class="checkbox-wrapper"><span class="custom-checkbox"></span></div>
+                    <div class="item-content">
+                        <span class="call-label">Respiratory</span>
+                        <span class="item-text">CONFIRM... SUCTION READY?</span>
+                        <div class="response-container">
+                            <span class="response-text">Ready</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="interactive-row" onclick="toggleRow(this)">
+                    <div class="checkbox-wrapper"><span class="custom-checkbox"></span></div>
+                    <div class="item-content">
+                        <span class="call-label">Respiratory</span>
+                        <span class="item-text">CONFIRM... BVM + PEEP VALVE + INLINE EtCO₂?</span>
+                        <div class="response-container">
+                            <span class="response-text">Ready</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="domain-group">
+                <div class="domain-header">Pharmacology & Backups</div>
+
+                <div class="interactive-row" onclick="toggleRow(this)">
+                    <div class="checkbox-wrapper"><span class="custom-checkbox"></span></div>
+                    <div class="item-content">
+                        <span class="call-label">Medication Nurse</span>
+                        <span class="item-text">VERBALIZE... INDUCTION DOSE?</span>
+                        <div class="response-container">
+                            <span class="response-text">Confirmed</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="interactive-row" onclick="toggleRow(this)">
+                    <div class="checkbox-wrapper"><span class="custom-checkbox"></span></div>
+                    <div class="item-content">
+                        <span class="call-label">Medication Nurse</span>
+                        <span class="item-text">VERBALIZE... PARALYTIC DOSE?</span>
+                        <div class="response-container">
+                            <span class="response-text">Confirmed</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="interactive-row" onclick="toggleRow(this)">
+                    <div class="checkbox-wrapper"><span class="custom-checkbox"></span></div>
+                    <div class="item-content">
+                        <span class="call-label">Operator</span>
+                        <span class="item-text">CONFIRM... BACKUP PLAN?</span>
+                        <div class="response-container">
+                            <span class="response-text">Three attempts, then supraglottic, then front of neck (cric)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TRANSITION DIVIDER BOX -->
+        <div class="transition-divider">
+            PROCEED WITH INTUBATION
+        </div>
+
+        <!-- SECTION 2: POST-INTUBATION CHECK -->
+        <div class="section" id="post-intubation-section">
+            <h2>2. Post-Intubation Check</h2>
+
+            <!-- Group 1: Physiology -->
+            <div class="domain-group">
+                <div class="domain-header">Physiology</div>
+                
+                <div class="interactive-row" onclick="toggleRow(this)">
+                    <div class="checkbox-wrapper"><span class="custom-checkbox"></span></div>
+                    <div class="item-content">
+                        <span class="call-label">Physiology</span>
+                        <span class="item-text">CONFIRM... EtCO₂ WAVEFORM?</span>
+                        <div class="response-container">
+                            <span class="response-text">Confirm</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="interactive-row" onclick="toggleRow(this)">
+                    <div class="checkbox-wrapper"><span class="custom-checkbox"></span></div>
+                    <div class="item-content">
+                        <span class="call-label">Physiology</span>
+                        <span class="item-text">CONFIRM... HOP STABLE?</span>
+                        <div class="response-container">
+                            <span class="response-text">Confirm</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Group 2: Tube Integrity -->
+            <div class="domain-group">
+                <div class="domain-header">Tube Integrity</div>
+
+                <div class="interactive-row" onclick="toggleRow(this)">
+                    <div class="checkbox-wrapper"><span class="custom-checkbox"></span></div>
+                    <div class="item-content">
+                        <span class="call-label">Tube Integrity</span>
+                        <span class="item-text">CONFIRM... TUBE DEPTH?</span>
+                        <div class="response-container">
+                            <span class="response-text">Verified and recorded</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="interactive-row" onclick="toggleRow(this)">
+                    <div class="checkbox-wrapper"><span class="custom-checkbox"></span></div>
+                    <div class="item-content">
+                        <span class="call-label">Tube Integrity</span>
+                        <span class="item-text">CONFIRM... TUBE SECURE?</span>
+                        <div class="response-container">
+                            <span class="response-text">Completed</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="interactive-row" onclick="toggleRow(this)">
+                    <div class="checkbox-wrapper"><span class="custom-checkbox"></span></div>
+                    <div class="item-content">
+                        <span class="call-label">Tube Integrity</span>
+                        <span class="item-text">CONFIRM... CXR ORDERED?</span>
+                        <div class="response-container">
+                            <span class="response-text">Ordered</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Group 3: Ventilation Setup -->
+            <div class="domain-group">
+                <div class="domain-header">Ventilation Setup</div>
+
+                <div class="interactive-row" onclick="toggleRow(this)">
+                    <div class="checkbox-wrapper"><span class="custom-checkbox"></span></div>
+                    <div class="item-content">
+                        <span class="call-label">Ventilation Setup</span>
+                        <span class="item-text">CONFIRM... VENTILATOR SETUP?</span>
+                        <div class="response-container">
+                            <span class="response-text">Settings applied</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="interactive-row" onclick="toggleRow(this)">
+                    <div class="checkbox-wrapper"><span class="custom-checkbox"></span></div>
+                    <div class="item-content">
+                        <span class="call-label">Ventilation Setup</span>
+                        <span class="item-text">CONFIRM... INLINE EtCO₂?</span>
+                        <div class="response-container">
+                            <span class="response-text">Visible</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Group 4: Sedation -->
+            <div class="domain-group">
+                <div class="domain-header">Sedation</div>
+
+                <div class="interactive-row" onclick="toggleRow(this)">
+                    <div class="checkbox-wrapper"><span class="custom-checkbox"></span></div>
+                    <div class="item-content">
+                        <span class="call-label">Sedation</span>
+                        <span class="item-text">CONFIRM... SEDATION INFUSION?</span>
+                        <div class="response-container">
+                            <span class="response-text">Started</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ACTIONS -->
+        <div class="btn-container">
+            <button class="btn-secondary" onclick="resetChecklist()">Reset</button>
+            <button class="btn-primary" onclick="completeChecklist()">Complete Session</button>
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <span class="brand-footer">ResusLogix &copy; 2026</span>
+            <br>For education purposes only
+        </footer>
+    </div>
+
+    <script>
+        function toggleRow(element) {
+            element.classList.toggle('checked');
+        }
+
+        function resetChecklist() {
+            const rows = document.querySelectorAll('.interactive-row');
+            rows.forEach(row => {
+                row.classList.remove('checked');
+            });
+        }
+
+        function completeChecklist() {
+            const totalRows = document.querySelectorAll('.interactive-row').length;
+            const checkedRows = document.querySelectorAll('.interactive-row.checked').length;
+            
+            if (checkedRows === totalRows) {
+                alert('All items confirmed safely. Clinical protocol completed.');
+            } else {
+                const missing = totalRows - checkedRows;
+                alert('Warning: ' + missing + ' protocol checklist items have not been verified.');
+            }
+        }
+    </script>
+</body>
+</html>
