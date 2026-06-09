@@ -14,11 +14,50 @@
         body {
             background-color: #0d0d0d; /* Keeps the deep black frame border */
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             overflow: hidden;
             padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* Fixed Navigation Bar at the top */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            padding: 20px;
+            background: linear-gradient(to bottom, rgba(13, 13, 13, 0.9) 60%, rgba(13, 13, 13, 0));
+            z-index: 1000;
+        }
+
+        .navbar a {
+            color: #888888;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.2s ease;
+        }
+
+        .navbar a:hover, .navbar a.active {
+            color: #ffffff;
+        }
+
+        /* Container to keep logo perfectly centered dynamically */
+        .content-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px; /* Prevents overlap with the navbar */
         }
 
         /* Displays the exact image file without losing layout proportions */
@@ -37,8 +76,15 @@
 </head>
 <body>
 
-    <!-- Renders your uploaded asset flawlessly -->
-    <img src="KubarkULTRA_LOGO.png" alt="KubarkULTRA" class="source-viewport">
+    <nav class="navbar">
+        <a href="index.html" class="active">Home</a>
+        <a href="dash1a.html">Dashboard 1a</a>
+        <a href="icu-rounding/">ICU Rounding</a>
+    </nav>
+
+    <div class="content-container">
+        <img src="KubarkULTRA_LOGO.png" alt="KubarkULTRA" class="source-viewport">
+    </div>
 
 </body>
 </html>
