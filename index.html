@@ -3,8 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KubarkULTRA</title>
+    <title>KubarkULTRA | Medical Education Repository</title>
     <style>
+        /* ResusLogix Premium Unified Design System Matrix */
+        :root {
+            --bg-color: #ffffff;
+            --text-main: #111111;
+            --text-muted: #555555;
+            --accent-blue: #003366;
+            --accent-hover: #002244;
+            --border-light: #e0e0e0;
+            --border-checkbox: #888888;
+            --bg-card: #f9f9f9;
+            --radius: 8px;
+            --tag-edu-bg: #f3e5f5;
+            --tag-edu-text: #6a1b9a;
+            --tag-tool-bg: #e6f2ff;
+            --tag-tool-text: #0044cc;
+            --tag-chk-bg: #fff3cd;
+            --tag-chk-text: #856404;
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -12,79 +31,1127 @@
         }
 
         body {
-            background-color: #0d0d0d; /* Keeps the deep black frame border */
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.4;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Nav Framework */
+        nav {
+            border-bottom: 1px solid var(--border-light);
+            background: var(--bg-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--text-main);
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: color 0.15s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent-blue);
+        }
+
+        /* Viewport Panels */
+        .view-pane {
+            display: none;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        .view-pane.active-pane {
+            display: block;
+        }
+
+        /* Typography Standards */
+        .pre-header {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-blue);
+            margin-bottom: 8px;
+        }
+
+        h1 {
+            font-size: 38px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: var(--text-main);
+            line-height: 1.1;
+            margin-bottom: 16px;
+        }
+
+        .lead-text {
+            font-size: 16px;
+            font-weight: 400;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin-bottom: 32px;
+        }
+
+        /* Focus Map Information Box */
+        .notice-banner {
+            border: 1px dashed var(--accent-blue);
+            border-radius: var(--radius);
+            background-color: var(--bg-card);
+            padding: 20px;
+            margin-bottom: 32px;
+        }
+
+        .notice-banner h3 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-bottom: 8px;
+        }
+
+        .notice-banner ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 8px;
+        }
+
+        .notice-banner li {
+            font-size: 13px;
+            color: var(--text-main);
+            margin-bottom: 6px;
+            padding-left: 14px;
+            position: relative;
+        }
+
+        .notice-banner li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--accent-blue);
+            font-weight: bold;
+        }
+
+        /* UI Controls Bar */
+        .controls-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+
+        .search-input {
+            flex: 1;
+            min-width: 280px;
+            max-width: 400px;
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius);
+            padding: 12px 16px;
+            font-size: 14px;
+            font-family: inherit;
+            outline: none;
+            background-color: var(--bg-color);
+        }
+
+        .search-input:focus {
+            border-color: var(--accent-blue);
+        }
+
+        /* Matrix Card Layout Engine */
+        .directory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .matrix-card {
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius);
+            background: var(--bg-color);
+            padding: 24px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            overflow: hidden;
-            padding: 20px;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            justify-content: space-between;
+            transition: border-color 0.15s ease;
         }
 
-        /* Fixed Navigation Bar at the top */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            gap: 24px;
-            padding: 20px;
-            background: linear-gradient(to bottom, rgba(13, 13, 13, 0.9) 60%, rgba(13, 13, 13, 0));
-            z-index: 1000;
+        .matrix-card:hover {
+            border-color: var(--accent-blue);
         }
 
-        .navbar a {
-            color: #888888;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            letter-spacing: 1px;
+        .card-meta-tag {
+            align-self: flex-start;
+            font-size: 10px;
+            font-weight: 700;
             text-transform: uppercase;
-            transition: color 0.2s ease;
+            letter-spacing: 0.5px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin-bottom: 16px;
         }
 
-        .navbar a:hover, .navbar a.active {
-            color: #ffffff;
+        .tag-tool { background-color: var(--tag-tool-bg); color: var(--tag-tool-text); }
+        .tag-checklist { background-color: var(--tag-chk-bg); color: var(--tag-chk-text); }
+        .tag-edu { background-color: var(--tag-edu-bg); color: var(--tag-edu-text); }
+
+        .matrix-card h2 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-main);
+            line-height: 1.2;
+            margin-bottom: 12px;
         }
 
-        /* Container to keep logo perfectly centered dynamically */
-        .content-container {
-            width: 100%;
-            display: flex;
-            justify-content: center;
+        .matrix-card p {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.4;
+            margin-bottom: 24px;
+            flex-grow: 1;
+        }
+
+        .action-link {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--accent-blue);
+            text-decoration: none;
+            display: inline-flex;
             align-items: center;
-            margin-top: 40px; /* Prevents overlap with the navbar */
+            cursor: pointer;
         }
 
-        /* Displays the exact image file without losing layout proportions */
-        .source-viewport {
+        /* Checklist/Tool Module Layouts */
+        .module-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .module-header {
+            border-bottom: 2px solid var(--text-main);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .module-header h2 {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--text-main);
+        }
+
+        .module-subtitle {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        /* Interactive Dashboard Elements */
+        .static-box {
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius);
+            padding: 10px;
+            background-color: var(--bg-card);
+            min-height: 44px;
             width: 100%;
-            max-width: 1000px; /* Restricts maximum width to preserve crispness */
-            height: auto;
-            aspect-ratio: 16 / 9;
+        }
+
+        .section-component-title {
             display: block;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
-            border-radius: 4px; /* Matches the organic corner falloff of the file */
-            user-select: none;
-            pointer-events: none;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        .code-status-container {
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius);
+            padding: 10px;
+            margin-bottom: 16px;
+        }
+
+        .code-status-options {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+            margin-top: 4px;
+        }
+
+        .code-status-options fieldset {
+            border: none;
+            display: contents;
+        }
+
+        .code-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .code-option label {
+            display: block;
+            text-align: center;
+            padding: 6px 2px;
+            font-size: 11px;
+            font-weight: 700;
+            border: 1px solid var(--border-light);
+            border-radius: 6px;
+            background-color: var(--bg-color);
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .code-option input[type="radio"]:checked + label {
+            background-color: var(--text-main);
+            color: var(--bg-color);
+            border-color: var(--text-main);
+        }
+
+        .system-section {
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius);
+            margin-bottom: 12px;
+            overflow: hidden;
+            background-color: var(--bg-color);
+        }
+
+        .system-header {
+            background-color: var(--bg-card);
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .system-title {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .system-body {
+            padding: 10px 12px;
+        }
+
+        .prompt-list {
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed var(--border-light);
+        }
+
+        .prompt-item {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .prompt-item:last-child { margin-bottom: 0; }
+
+        .prompt-item::before {
+            content: "—";
+            color: var(--accent-blue);
+            font-weight: bold;
+            display: inline-block;
+            width: 14px;
+            flex-shrink: 0;
+        }
+
+        .call-tag {
+            font-weight: 800;
+            color: var(--text-main);
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+
+        .response-text {
+            color: var(--text-main);
+            margin-left: 4px;
+        }
+
+        .quality-indicators-title {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .checkbox-container { padding-left: 2px; }
+
+        .checkbox-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 8px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .checkbox-item:last-child { margin-bottom: 0; }
+
+        .checkbox-item input[type="checkbox"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .checkmark {
+            height: 16px;
+            width: 16px;
+            border: 1px solid var(--border-checkbox);
+            border-radius: 4px;
+            display: inline-block;
+            margin-right: 8px;
+            flex-shrink: 0;
+            position: relative;
+            background-color: var(--bg-color);
+        }
+
+        .checkbox-item input[type="checkbox"]:checked ~ .checkmark {
+            background-color: var(--text-main);
+            border-color: var(--text-main);
+        }
+
+        .checkbox-item input[type="checkbox"]:checked ~ .checkmark:after {
+            content: "";
+            position: absolute;
+            left: 4px;
+            top: 1px;
+            width: 4px;
+            height: 7px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        .checkbox-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-main);
+            padding-top: 1px;
+            width: 100%;
+        }
+
+        .nested-group {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-left: 4px;
+        }
+
+        .nested-item {
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .nested-item input[type="checkbox"] {
+            margin-right: 3px;
+            position: static;
+            opacity: 1;
+            height: 12px;
+            width: 12px;
+        }
+
+        .disposition-section {
+            border-top: 2px solid var(--text-main);
+            margin-top: 16px;
+            padding-top: 12px;
+            padding-bottom: 20px;
+        }
+
+        .disp-block {
+            width: 100%;
+            margin-bottom: 14px;
+        }
+
+        .disp-block label {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        /* Interactive Matrix Engine (DASH1A Template Aligned) */
+        .dash-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .dash-input-group {
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius);
+            padding: 12px;
+            background: var(--bg-color);
+        }
+
+        .dash-input-group label {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--accent-blue);
+            margin-bottom: 6px;
+        }
+
+        .dash-input-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid var(--border-light);
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: inherit;
+            outline: none;
+        }
+
+        .dash-output-box {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-top: 24px;
+        }
+
+        .dash-output-box h3 {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-main);
+            margin-bottom: 12px;
+            border-bottom: 1px solid var(--border-light);
+            padding-bottom: 6px;
+        }
+
+        .output-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 14px;
+            border-bottom: 1px dashed var(--border-light);
+        }
+
+        .output-row:last-child {
+            border-bottom: none;
+        }
+
+        .output-value {
+            font-weight: 700;
+            color: var(--accent-blue);
+        }
+
+        .edu-footer {
+            border-top: 2px solid var(--text-main);
+            margin-top: 32px;
+            padding-top: 16px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .qa-footer {
+            font-size: 9px;
+            text-align: center;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 14px;
+        }
+
+        @media (min-width: 768px) {
+            .controls-bar { flex-wrap: nowrap; }
         }
     </style>
 </head>
 <body>
 
-    <nav class="navbar">
-        <a href="index.html" class="active">Home</a>
-        <a href="dash1a.html">DASH-1A</a>
-        <a href="icu-rounding/">ICU Rounding</a>
+    <!-- Unified Navigation Bar Framework -->
+    <nav>
+        <div class="nav-container">
+            <a class="nav-logo" href="#" onclick="switchView('home')">KubarkULTRA</a>
+            <div class="nav-links">
+                <a href="#" id="nav-home" onclick="switchView('home')">Home</a>
+                <a href="#" id="nav-dash1a" onclick="switchView('edu-tool')">DASH-1A</a>
+                <a href="#" id="nav-rounding" onclick="switchView('rounding-tool')">ICU Rounding</a>
+            </div>
+        </div>
     </nav>
 
-    <div class="content-container">
-        <img src="KubarkULTRA_LOGO.png" alt="KubarkULTRA" class="source-viewport">
-    </div>
+    <!-- VIEW 1: HOME PANEL -->
+    <main id="view-home" class="view-pane active-pane">
+        <div class="pre-header">Operational Medicine Hub</div>
+        <h1>KubarkULTRA Platform</h1>
+        <p class="lead-text">Clinical decision support infrastructure, high-acuity utilities, and medical education repositories optimized for deployment environments.</p>
+        
+        <div style="margin-top: 40px; padding: 24px; border: 1px solid var(--border-light); border-radius: var(--radius); max-width: 500px;">
+            <h3 style="font-size: 16px; margin-bottom: 8px;">Access Application Architecture</h3>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">Navigate directly to the verified clinical index list to deploy active modules or calculation configurations.</p>
+            <button class="btn btn-primary" style="width: auto; padding: 10px 20px;" onclick="switchView('tools')">Go to Tools Repository →</button>
+        </div>
+    </main>
 
+    <!-- VIEW 2: TOOLS MATRIX INTERFACE -->
+    <main id="view-tools" class="view-pane">
+        <div class="pre-header">AUSTERE & HIGH-ACUITY OPERATIONS REPOSITORY</div>
+        <h1>KubarkULTRA</h1>
+        <p class="lead-text">Operational medicine decision support, calculators, and deployment checklists designed for edge, resource-constrained, and high-stress environments.</p>
+
+        <!-- Focus Map Information Box -->
+        <div class="notice-banner">
+            <h3>Strategic Focus Map: Distinct From ResusLogix & CableCrit</h3>
+            <p style="font-size: 13px; color: var(--text-muted);">While ResusLogix.com handles core inside-the-wires tertiary ICU physiology, and CableCrit.com captures primary trauma-surgical critical care pathways, KubarkULTRA serves as the missing operational nexus. We target the friction points where elite physiology meets absolute isolation, variable infrastructure, and non-linear environments.</p>
+            <ul>
+                <li><strong>Interactive Engines:</strong> Web-calculators built exclusively for dynamic physiology tracking under resource restrictions.</li>
+                <li><strong>Checklists:</strong> Reconfigurable tactical action cards meant to execute directly from a mobile device or offline environment.</li>
+                <li><strong>Education Modules:</strong> High-acuity knowledge assets designed for rapid deployment and reference.</li>
+            </ul>
+        </div>
+
+        <!-- Matrix Controls Bar -->
+        <div class="controls-bar">
+            <input type="text" class="search-input" placeholder="Filter tools, checklists, and modules...">
+            <div style="display:flex; gap:8px;">
+                <button class="btn btn-secondary" style="padding: 10px 16px;">Jump to Directory</button>
+                <button class="btn btn-primary" style="padding: 10px 16px;">Reload Matrix</button>
+            </div>
+        </div>
+
+        <!-- Cards Manifest Matrix -->
+        <div class="directory-grid">
+            
+            <!-- Intensive Care Rounding Checklist Card -->
+            <div class="matrix-card">
+                <div>
+                    <span class="card-meta-tag tag-checklist">Operational Checklist</span>
+                    <h2>Intensive Care Rounding Matrix</h2>
+                    <p>A specialized call-and-response clinical checklist organized into concise structured actions for multi-system high-acuity rounds execution.</p>
+                </div>
+                <span class="action-link" onclick="switchView('rounding-tool')">Open Checklist →</span>
+            </div>
+
+            <!-- DASH1A Education Module Card -->
+            <div class="matrix-card">
+                <div>
+                    <span class="card-meta-tag tag-edu">Education Module</span>
+                    <h2>DASH1A Triage & Resuscitation Engine</h2>
+                    <p>An interactive triage decision support tool and reference engine built for resource-constrained environments, tracking fluid rescue metrics and physiological optimization priorities.</p>
+                </div>
+                <span class="action-link" onclick="switchView('edu-tool')">Launch Module →</span>
+            </div>
+
+            <div class="matrix-card">
+                <div>
+                    <span class="card-meta-tag tag-tool">Interactive Tool</span>
+                    <h2>Dynamic Burn Resuscitation Fluid Calculator</h2>
+                    <p>Goes beyond standard Parkland models to run dynamic hourly adjustments, urine output indexing, and automated colloid rescue triggers for prolonged field environments.</p>
+                </div>
+                <span class="action-link">Launch Tool →</span>
+            </div>
+
+            <div class="matrix-card">
+                <div>
+                    <span class="card-meta-tag tag-checklist">Operational Checklist</span>
+                    <h2>Austere Airway Checklist & Pre-Oxygenation Tracker</h2>
+                    <p>A high-stress, interactive checklist featuring digital countdown warnings for physiologic optimization prior to non-operating-room intubations.</p>
+                </div>
+                <span class="action-link">Open Checklist →</span>
+            </div>
+
+            <div class="matrix-card">
+                <div>
+                    <span class="card-meta-tag tag-tool">Interactive Tool</span>
+                    <h2>Prolonged Field Care Telemetry Matrix</h2>
+                    <p>An offline-capable digital charting grid engineered to convert manually logged serial vitals into automated trend visualizations when monitors are unavailable.</p>
+                </div>
+                <span class="action-link">Launch Tool →</span>
+            </div>
+
+            <div class="matrix-card">
+                <div>
+                    <span class="card-meta-tag tag-checklist">Operational Checklist</span>
+                    <h2>Massive Transfusion Protocol (MTP) Trigger Matrix</h2>
+                    <p>Step-by-step scoring tool and delivery checklist to optimize whole-blood delivery ratios, calcium repletion timelines, and metabolic monitoring checkpoints.</p>
+                </div>
+                <span class="action-link">Open Checklist →</span>
+            </div>
+
+            <div class="matrix-card">
+                <div>
+                    <span class="card-meta-tag tag-tool">Interactive Tool</span>
+                    <h2>Pediatric Resuscitation & Infusion Estimator</h2>
+                    <p>A zero-lag calculator for complex pediatric drug infusions, equipment sizes, and weight-bracket estimations tailored to rapid field configuration.</p>
+                </div>
+                <span class="action-link">Launch Tool →</span>
+            </div>
+        </div>
+    </main>
+
+    <!-- VIEW 3: ACTIVE CHECKLIST VIEW INTERFACE -->
+    <main id="view-rounding-tool" class="view-pane">
+        <div class="checklist-container">
+            <header class="checklist-header">
+                <h2>Rounding Checklist</h2>
+            </header>
+            <div class="checklist-subtitle">Call-and-Response Format</div>
+
+            <!-- Context Processing Demographics -->
+            <section class="context-stack">
+                <div class="static-box">
+                    <span class="section-component-title">Patient Identifier</span>
+                </div>
+                <div class="static-box">
+                    <span class="section-component-title">One-Liner Summary</span>
+                </div>
+            </section>
+
+            <!-- Code Status Component -->
+            <section class="code-status-container">
+                <div class="code-status-title section-component-title">Code Status</div>
+                <div class="code-status-options">
+                    <fieldset>
+                        <legend style="display:none;">Code Status Options</legend>
+                        <div class="code-option">
+                            <input type="radio" id="code-full" name="code_status" value="Full">
+                            <label for="code-full">Full</label>
+                        </div>
+                        <div class="code-option">
+                            <input type="radio" id="code-dni" name="code_status" value="DNI">
+                            <label for="code-dni">DNI</label>
+                        </div>
+                        <div class="code-option">
+                            <input type="radio" id="code-dnr" name="code_status" value="DNR">
+                            <label for="code-dnr">DNR</label>
+                        </div>
+                        <div class="code-option">
+                            <input type="radio" id="code-cmo" name="code_status" value="CMO">
+                            <label for="code-cmo">CMO</label>
+                        </div>
+                    </fieldset>
+                </div>
+            </section>
+
+            <!-- Systems Elements Manifest -->
+            <main>
+                <!-- NEUROLOGIC -->
+                <div class="system-section">
+                    <div class="system-header"><span class="system-title">Neurologic</span></div>
+                    <div class="system-body">
+                        <div class="prompt-list">
+                            <div class="prompt-item"><span class="call-tag">NURSING:</span><span class="response-text">CPOT and RASS?</span></div>
+                            <div class="prompt-item"><span class="call-tag">PHARMACY:</span><span class="response-text">High risk meds?</span></div>
+                        </div>
+                        <div class="quality-indicators-title">Quality Indicators</div>
+                        <div class="checkbox-container">
+                            <label class="checkbox-item"><input type="checkbox"><span class="checkmark"></span><span class="checkbox-label">pain, agitation, sedation</span></label>
+                            <label class="checkbox-item"><input type="checkbox"><span class="checkmark"></span><span class="checkbox-label">delirium mitigation</span></label>
+                            <label class="checkbox-item"><input type="checkbox"><span class="checkmark"></span><span class="checkbox-label">sleep hygiene</span></label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PULMONARY -->
+                <div class="system-section">
+                    <div class="system-header"><span class="system-title">Pulmonary</span></div>
+                    <div class="system-body">
+                        <div class="prompt-list">
+                            <div class="prompt-item"><span class="call-tag">NURSING:</span><span class="response-text">Respiratory concerns?</span></div>
+                            <div class="prompt-item"><span class="call-tag">RT:</span><span class="response-text">Status update?</span></div>
+                        </div>
+                        <div class="quality-indicators-title">Quality Indicators</div>
+                        <div class="checkbox-container">
+                            <div class="checkbox-label" style="padding-left:0;">
+                                SBT / ERT:
+                                <span class="nested-group">
+                                    <span class="nested-item"><input type="checkbox"> Pass</span>
+                                    <span class="nested-item"><input type="checkbox"> Fail</span>
+                                    <span class="nested-item"><input type="checkbox"> Deferred</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARDIOVASCULAR -->
+                <div class="system-section">
+                    <div class="system-header"><span class="system-title">Cardiovascular</span></div>
+                    <div class="system-body">
+                        <div class="prompt-list">
+                            <div class="prompt-item"><span class="call-tag">NURSING:</span><span class="response-text">Hemodynamics?</span></div>
+                            <div class="prompt-item"><span class="call-tag">PHARMACY:</span><span class="response-text">Active infusions?</span></div>
+                        </div>
+                        <div class="quality-indicators-title">Quality Indicators</div>
+                        <div class="checkbox-container">
+                            <label class="checkbox-item"><input type="checkbox"><span class="checkmark"></span><span class="checkbox-label">Arterial line</span></label>
+                            <label class="checkbox-item"><input type="checkbox"><span class="checkmark"></span><span class="checkbox-label">Central line</span></label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- GASTROINTESTINAL -->
+                <div class="system-section">
+                    <div class="system-header"><span class="system-title">Gastrointestinal</span></div>
+                    <div class="system-body">
+                        <div class="prompt-list">
+                            <div class="prompt-item"><span class="call-tag">NURSING:</span><span class="response-text">Enteral intake/output?</span></div>
+                            <div class="prompt-item"><span class="call-tag">NUTRITION:</span><span class="response-text">Recommendations?</span></div>
+                            <div class="prompt-item"><span class="call-tag">PHARMACY:</span><span class="response-text">Prophylaxis?</span></div>
+                        </div>
+                        <div class="quality-indicators-title">Quality Indicators</div>
+                        <div class="checkbox-container">
+                            <label class="checkbox-item"><input type="checkbox"><span class="checkmark"></span><span class="checkbox-label">G.I. prophylaxis</span></label>
+                            <label class="checkbox-item"><input type="checkbox"><span class="checkmark"></span><span class="checkbox-label">Bowel regimen</span></label>
+                            <label class="checkbox-item"><input type="checkbox"><span class="checkmark"></span><span class="checkbox-label">PO days</span></label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEPHROLOGY -->
+                <div class="system-section">
+                    <div class="system-header"><span class="system-title">Nephrology</span></div>
+                    <div class="system-body">
+                        <div class="prompt-list">
+                            <div class="prompt-item"><span class="call-tag">NURSING:</span><span class="response-text">UOP (cc/kg/hr)?</span></div>
+                            <div class="prompt-item"><span class="call-tag">PHARMACY:</span><span class="response-text">Electrolyte concerns?</span></div>
+                            <div class="prompt-item"><span class="call-tag">PHARMACY:</span><span class="response-text">Renal dose recommendations?</span></div>
+                        </div>
+                        <div class="quality-indicators-title">Quality Indicators</div>
+                        <div class="checkbox-container">
+                            <label class="checkbox-item"><input type="checkbox"><span class="checkmark"></span><span class="checkbox-label">Foley catheter</span></label>
+                            <label class="checkbox-item"><input type="checkbox"><span class="checkmark"></span><span class="checkbox-label">Acid/base balance</span></label>
+                            <label class="checkbox-item"><input type="checkbox"><span class="checkmark"></span><span class="checkbox-label">Electrolytic disarray</span></label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ENDOCRINE -->
+                <div class="system-section">
+                    <div class="system-header"><span class="system-title">Endocrine</span></div>
+                    <div class="system-body">
+                        <div class="prompt-list">
+                            <div class="prompt-item"><span class="call-tag">NURSING:</span><span class="response-text">Glucose trends?</span></div>
+                            <div class="prompt-item"><span class="call-tag">PHARMACY:</span><span class="response-text">Insulin / dextrose?</span></div>
+                            <div class="prompt-item"><span class="call-tag">PHARMACY:</span><span class="response-text">Steroids / thyroids?</span></div>
+                        </div>
+                        <div class="quality-indicators-title">Quality Indicators</div>
+                        <div class="checkbox-container">
+                            <label class="checkbox-item"><input type="checkbox"><span class="checkmark"></span><span class="checkbox-label">Hypoglycemia (past 24h)</span></label>
+                            <label class="checkbox-item"><input type="checkbox"><span class="checkmark"></span><span class="checkbox-label">Hyperglycemia (past 24h)</span></label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HEMATOLOGY -->
+                <div class="system-section">
+                    <div class="system-header"><span class="system-title">Hematology</span></div>
+                    <div class="system-body">
+                        <div class="prompt-list">
+                            <div class="prompt-item"><span class="call-tag">NURSING:</span><span class="response-text">Bleeding?</span></div>
+                            <div class="prompt-item"><span class="call-tag">PHARMACY:</span><span class="response-text">Blood products?</span></div>
+                        </div>
+                        <div class="quality-indicators-title">Quality Indicators</div>
+                        <div class="checkbox-container">
+                            <label class="checkbox-item"><input type="checkbox"><span class="checkmark"></span><span class="checkbox-label">VTE prophylaxis</span></label>
+                            <label class="checkbox-item"><input type="checkbox"><span class="checkmark"></span><span class="checkbox-label">Blood consent</span></label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MUSCULOSKELETAL -->
+                <div class="system-section">
+                    <div class="system-header"><span class="system-title">Musculoskeletal</span></div>
+                    <div class="system-body">
+                        <div class="prompt-list">
+                            <div class="prompt-item"><span class="call-tag">NURSING:</span><span class="response-text">Wounds / Mobility?</span></div>
+                            <div class="prompt-item"><span class="call-tag">NURSING:</span><span class="response-text">Orthopedic concerns?</span></div>
+                        </div>
+                        <div class="quality-indicators-title">Quality Indicators</div>
+                        <div class="checkbox-container">
+                            <label class="checkbox-item"><input type="checkbox"><span class="checkmark"></span><span class="checkbox-label">Mobility</span></label>
+                            <label class="checkbox-item"><input type="checkbox"><span class="checkmark"></span><span class="checkbox-label">Restraints</span></label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- INFECTIOUS DISEASE -->
+                <div class="system-section">
+                    <div class="system-header"><span class="system-title">Infectious Disease</span></div>
+                    <div class="system-body">
+                        <div class="prompt-list">
+                            <div class="prompt-item"><span class="call-tag">NURSING:</span><span class="response-text">Infectious concerns?</span></div>
+                            <div class="prompt-item"><span class="call-tag">PHARMACY:</span><span class="response-text">Antimicrobials updates?</span></div>
+                        </div>
+                        <div class="quality-indicators-title">Quality Indicators</div>
+                        <div class="checkbox-container">
+                            <label class="checkbox-item"><input type="checkbox"><span class="checkmark"></span><span class="checkbox-label">Abx stewardship</span></label>
+                            <label class="checkbox-item"><input type="checkbox"><span class="checkmark"></span><span class="checkbox-label">Review cultures</span></label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SURGERY/TRAUMA -->
+                <div class="system-section">
+                    <div class="system-header"><span class="system-title">Surgery / Trauma</span></div>
+                    <div class="system-body">
+                        <div class="prompt-list">
+                            <div class="prompt-item"><span class="call-tag">NURSING:</span><span class="response-text">Operative plans?</span></div>
+                            <div class="prompt-item"><span class="call-tag">PHARMACY:</span><span class="response-text">MAR holds?</span></div>
+                        </div>
+                        <div class="quality-indicators-title">Quality Indicators</div>
+                        <div class="checkbox-container">
+                            <label class="checkbox-item"><input type="checkbox"><span class="checkmark"></span><span class="checkbox-label">Surgeon's daily update</span></label>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Final Verification Modules -->
+            <section class="disposition-section">
+                <div class="disp-block">
+                    <label class="section-component-title">Disposition Planning</label>
+                    <div class="checkbox-container">
+                        <label class="checkbox-item"><input type="checkbox"><span class="checkmark"></span><span class="checkbox-label">Case mgmt: LOS and DC barriers?</span></label>
+                        <label class="checkbox-item"><input type="checkbox"><span class="checkmark"></span><span class="checkbox-label">Nursing: DG barriers?</span></label>
+                    </div>
+                </div>
+
+                <div class="action-footer">
+                    <button class="btn btn-primary" onclick="clearActiveMatrix()">Clear Matrix Checklist</button>
+                    <button class="btn btn-secondary" onclick="switchView('tools')">Back to Tools Index</button>
+                </div>
+
+                <div class="qa-footer">
+                    [Confidential quality assurance document]
+                </div>
+            </section>
+        </div>
+    </nav>
+
+    <!-- VIEW 4: INTERACTIVE DASH1A EDUCATION ENGINE MODULE -->
+    <main id="view-edu-tool" class="view-pane">
+        <div class="module-container">
+            <header class="module-header">
+                <h2>DASH1A Resuscitation Engine</h2>
+            </header>
+            <div class="module-subtitle">Interactive Decision Support Module</div>
+
+            <!-- Input Matrix Grid -->
+            <section class="dash-grid">
+                <div class="dash-input-group">
+                    <label for="injury-mechanism">Mechanism of Injury</label>
+                    <select id="injury-mechanism" onchange="calculateDashMetrics()">
+                        <option value="penetrating">Penetrating Trauma</option>
+                        <option value="blunt">Blunt Force Trauma</option>
+                        <option value="blast">Blast / Thermal Injury</option>
+                    </select>
+                </div>
+
+                <div class="dash-input-group">
+                    <label for="gcs-score">Motor Response Score (GCS)</label>
+                    <select id="gcs-score" onchange="calculateDashMetrics()">
+                        <option value="normal">Normal / Obeys Commands (6)</option>
+                        <option value="localizes">Localizes Pain (5)</option>
+                        <option value="withdraws">Withdraws to Pain (4)</option>
+                        <option value="abnormal">Abnormal Flexion/Extension (2-3)</option>
+                        <option value="none">No Response (1)</option>
+                    </select>
+                </div>
+
+                <div class="dash-input-group">
+                    <label for="systolic-bp">Estimated Systolic BP</label>
+                    <select id="systolic-bp" onchange="calculateDashMetrics()">
+                        <option value="normal">> 90 mmHg (Radial Pulse Present)</option>
+                        <option value="low">70-90 mmHg (Femoral Only Present)</option>
+                        <option value="critical">< 70 mmHg (Carotid Only Present)</option>
+                    </select>
+                </div>
+            </section>
+
+            <!-- Dynamic Decision Matrix Output Box -->
+            <section class="dash-output-box">
+                <h3>Calculated Operational Directives</h3>
+                
+                <div class="output-row">
+                    <span>Triage Categorization Strategy:</span>
+                    <span id="out-triage" class="output-value">Immediate</span>
+                </div>
+
+                <div class="output-row">
+                    <span>Initial Fluid Resuscitation Strategy:</span>
+                    <span id="out-fluid" class="output-value">1:1 Blood Products Preferred</span>
+                </div>
+
+                <div class="output-row">
+                    <span>Airway Management Priority:</span>
+                    <span id="out-airway" class="output-value">Continuous Saturation Tracking</span>
+                </div>
+
+                <div class="output-row">
+                    <span>Physiological Target Priority:</span>
+                    <span id="out-target" class="output-value">Maintain MAP > 65 mmHg</span>
+                </div>
+            </section>
+
+            <!-- Action Controls Footer -->
+            <footer class="edu-footer">
+                <button class="btn btn-secondary" onclick="switchView('tools')">Back to Tools Index</button>
+                <button class="btn btn-primary" onclick="resetDashModule()">Reset Parameters</button>
+            </footer>
+
+            <div class="qa-footer">
+                [Confidential quality assurance document — Operational Use Only]
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Router system parsing view configuration lifecycle on initial navigation execution
+        window.addEventListener('DOMContentLoaded', () => {
+            parseHashRouting();
+        });
+
+        // Event detection hook for seamless toggle changes across top menu anchors
+        window.addEventListener('hashchange', () => {
+            parseHashRouting();
+        });
+
+        function parseHashRouting() {
+            const currentHash = window.location.hash;
+            if (currentHash === '#view-rounding-tool' || currentHash === '#rounding') {
+                switchView('rounding-tool');
+            } else if (currentHash === '#view-edu-tool' || currentHash === '#dash1a') {
+                switchView('edu-tool');
+            } else if (currentHash === '#tools' || currentHash === '#view-tools') {
+                switchView('tools');
+            } else {
+                switchView('home');
+            }
+        }
+
+        // Single Page Routing Engine Lifecycle
+        function switchView(viewName) {
+            document.querySelectorAll('.view-pane').forEach(pane => {
+                pane.classList.remove('active-pane');
+            });
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            if(viewName === 'home') {
+                document.getElementById('view-home').classList.add('active-pane');
+                document.getElementById('nav-home').classList.add('active');
+                if(window.location.hash !== '#home') window.location.hash = 'home';
+            } else if (viewName === 'tools') {
+                document.getElementById('view-tools').classList.add('active-pane');
+                if(window.location.hash !== '#view-tools') window.location.hash = 'view-tools';
+            } else if (viewName === 'rounding-tool') {
+                document.getElementById('view-rounding-tool').classList.add('active-pane');
+                document.getElementById('nav-rounding').classList.add('active');
+                if(window.location.hash !== '#rounding') window.location.hash = 'rounding';
+                window.scrollTo(0,0);
+            } else if (viewName === 'edu-tool') {
+                document.getElementById('view-edu-tool').classList.add('active-pane');
+                document.getElementById('nav-dash1a').classList.add('active');
+                if(window.location.hash !== '#dash1a') window.location.hash = 'dash1a';
+                calculateDashMetrics();
+                window.scrollTo(0,0);
+            }
+        }
+
+        function clearActiveMatrix() {
+            if (confirm("Reset tracking checklist matrix? All current selections will be dropped.")) {
+                const checkboxes = document.querySelectorAll('#view-rounding-tool input[type="checkbox"]');
+                checkboxes.forEach(cb => cb.checked = false);
+
+                const radios = document.querySelectorAll('#view-rounding-tool input[type="radio"]');
+                radios.forEach(r => r.checked = false);
+            }
+        }
+
+        // Calculation Algorithm for Interactive Education Engine
+        function calculateDashMetrics() {
+            const mechanism = document.getElementById('injury-mechanism').value;
+            const gcs = document.getElementById('gcs-score').value;
+            const sbp = document.getElementById('systolic-bp').value;
+
+            let triage = "Delayed / Minimal";
+            let fluid = "Controlled / Permissive Hypotension";
+            let airway = "Monitor Ventilation status";
+            let target = "MAP > 60 mmHg";
+
+            if (sbp === "critical" || gcs === "none" || gcs === "abnormal") {
+                triage = "Immediate / Alpha";
+                fluid = "Immediate Whole Blood Hemostatic Resuscitation";
+                airway = "Secure Definitive Airway / Pre-oxygenation protocol";
+                target = "Systolic BP 90 mmHg / Target Mentation";
+            } else if (sbp === "low" || gcs === "withdraws" || gcs === "localizes") {
+                triage = "Delayed / Urgent";
+                fluid = "1:1:1 Blood Product Balance / Minimize Crystalloids";
+                airway = "High-Flow Supplemental Oxygenation / Prepare Intubation Kit";
+                target = "Palpable Radial Pulse / Clear Sensorium";
+            } else {
+                triage = "Routine Assessment Status";
+                fluid = "PO Hydration / Access Maintenance Only";
+                airway = "Routine Monitoring";
+                target = "Baseline Normotension Parameter Goals";
+            }
+
+            document.getElementById('out-triage').innerText = triage;
+            document.getElementById('out-fluid').innerText = fluid;
+            document.getElementById('out-airway').innerText = airway;
+            document.getElementById('out-target').innerText = target;
+        }
+
+        function resetDashModule() {
+            document.getElementById('injury-mechanism').selectedIndex = 0;
+            document.getElementById('gcs-score').selectedIndex = 0;
+            document.getElementById('systolic-bp').selectedIndex = 0;
+            calculateDashMetrics();
+        }
+    </script>
 </body>
 </html>
