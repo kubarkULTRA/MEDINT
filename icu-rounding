@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResusLogix | Rounding Tool</title>
+    <style>
+        /* ResusLogix Design System - Premium Mobile High-Acuity Tech Aesthetic */
+        :root {
+            --bg-color: #ffffff;
+            --text-main: #111111;
+            --text-muted: #555555;
+            --accent-blue: #003366;
+            --accent-hover: #002244;
+            --border-light: #e0e0e0;
+            --border-checkbox: #888888;
+            --bg-card: #f9f9f9;
+            --radius: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.3;
+            padding: 12px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--bg-color);
+        }
+
+        /* Stark, Authoritative Header */
+        header {
+            border-bottom: 2px solid var(--text-main);
+            padding-bottom: 10px;
+            margin-bottom: 14px;
+        }
+
+        .meta-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        h1 {
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--text-main);
+            line-height: 1.1;
+            margin-bottom: 2px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        /* Full Width Stacked Context Cards */
+        .context-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 12px;
+            width: 100%;
+        }
+
+        .static-box {
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius);
+            padding: 10px;
+            background-color: var(--bg-card);
+            min-height: 44px;
+            width: 100%;
+        }
+
+        .section-component-title {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        /* Code Status Selection Matrix */
+        .code-status-container {
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius);
+            padding: 10px;
+            margin-bottom: 16px;
+        }
+
+        .code-status-options {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+            margin-top: 4px;
+        }
+
+        .code-status-options fieldset {
+            border: none;
+            display: contents;
+        }
+
+        .code-option {
+            position: relative;
+        }
+
+        .code-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .code-option label {
+            display: block;
+            text-align: center;
+            padding: 6px 2px;
+            font-size: 11px;
+            font-weight: 700;
+            border: 1px solid var(--border-light);
+            border-radius: 6px;
+            background-color: var(--bg-color);
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .code-option input[type="radio"]:checked + label {
+            background-color: var(--text-main);
+            color: var(--bg-color);
+            border-color: var(--text-main);
+        }
+
+        /* Systems Blocks Layout */
+        .system-section {
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius);
+            margin-bottom: 12px;
+            overflow: hidden;
+            background-color: var(--bg-color);
+        }
+
+        .system-header {
+            background-color: var(--bg-card);
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .system-title {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .system-body {
+            padding: 10px 12px;
+        }
+
+        /* Call & Response Checklist Items */
+        .prompt-list {
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed var(--border-light);
+        }
+
+        .prompt-item {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .prompt-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .prompt-item::before {
+            content: "—";
+            color: var(--accent-blue);
+            font-weight: bold;
+            display: inline-block;
+            width: 14px;
+            flex-shrink: 0;
+        }
+
+        .call-tag {
+            font-weight: 800;
+            color: var(--text-main);
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+
+        .response-text {
+            color: var(--text-main);
+            margin-left: 4px;
+        }
+
+        /* Quality Indicators Checkbox Controls */
+        .quality-indicators-title {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .checkbox-container {
+            padding-left: 2px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 8px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .checkbox-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        .checkmark {
+            height: 16px;
+            width: 16px;
+            border: 1px solid var(--border-checkbox);
+            border-radius: 4px;
+            display: inline-block;
+            margin-right: 8px;
+            flex-shrink: 0;
+            position: relative;
+            background-color: var(--bg-color);
+        }
+
+        .checkbox-item input[type="checkbox"]:checked ~ .checkmark {
+            background-color: var(--text-main);
+            border-color: var(--text-main);
+        }
+
+        .checkbox-item input[type="checkbox"]:checked ~ .checkmark:after {
+            content: "";
+            position: absolute;
+            left: 4px;
+            top: 1px;
+            width: 4px;
+            height: 7px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        .checkbox-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-main);
+            padding-top: 1px;
+            width: 100%;
+        }
+
+        /* Nested Inline Selections */
+        .nested-group {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-left: 4px;
+        }
+
+        .nested-item {
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .nested-item input[type="checkbox"] {
+            margin-right: 3px;
+            position: static;
+            opacity: 1;
+            height: 12px;
+            width: 12px;
+        }
+
+        /* Operational Footer Elements */
+        .disposition-section {
+            border-top: 2px solid var(--text-main);
+            margin-top: 16px;
+            padding-top: 12px;
+            padding-bottom: 20px;
+        }
+
+        .disp-block {
+            width: 100%;
+            margin-bottom: 14px;
+        }
+
+        .disp-block label {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .action-footer {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .btn {
+            flex: 1;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 10px;
+            border-radius: var(--radius);
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.15s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-blue);
+            color: var(--bg-color);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .qa-footer {
+            font-size: 9px;
+            text-align: center;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="meta-header">
+            <span>ResusLogix | Rounding Tool</span>
+        </div>
+        <h1>Rounding Checklist</h1>
+        <div class="subtitle">Call-and-Response Format</div>
+    </header>
+
+    <!-- Full-Width Stacked Context Deck with Unified Typography Alignment -->
+    <section class="context-grid">
+        <div class="static-box">
+            <span class="section-component-title">Patient Identifier</span>
+        </div>
+        <div class="static-box">
+            <span class="section-component-title">One-Liner Summary</span>
+        </div>
+    </section>
+
+    <!-- Code Status Matrix -->
+    <section class="code-status-container">
+        <div class="code-status-title section-component-title">Code Status</div>
+        <div class="code-status-options">
+            <fieldset>
+                <legend style="display:none;">Code Status Options</legend>
+                <div class="code-option">
+                    <input type="radio" id="code-full" name="code_status" value="Full">
+                    <label for="code-full">Full</label>
+                </div>
+                <div class="code-option">
+                    <input type="radio" id="code-dni" name="code_status" value="DNI">
+                    <label for="code-dni">DNI</label>
+                </div>
+                <div class="code-option">
+                    <input type="radio" id="code-dnr" name="code_status" value="DNR">
+                    <label for="code-dnr">DNR</label>
+                </div>
+                <div class="code-option">
+                    <input type="radio" id="code-cmo" name="code_status" value="CMO">
+                    <label for="code-cmo">CMO</label>
+                </div>
+            </fieldset>
+        </div>
+    </section>
+
+    <!-- Systems Operational Manifest -->
+    <main>
+        <!-- NEUROLOGIC -->
+        <section class="system-section">
+            <div class="system-header">
+                <span class="system-title">Neurologic</span>
+            </div>
+            <div class="system-body">
+                <div class="prompt-list">
+                    <div class="prompt-item"><span class="call-tag">NURSING:</span><span class="response-text">CPOT and RASS?</span></div>
+                    <div class="prompt-item"><span class="call-tag">PHARMACY:</span><span class="response-text">High risk meds?</span></div>
+                </div>
+                <div class="quality-indicators-title">Quality Indicators</div>
+                <div class="checkbox-container">
+                    <label class="checkbox-item">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        <span class="checkbox-label">pain, agitation, sedation</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        <span class="checkbox-label">delirium mitigation</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        <span class="checkbox-label">sleep hygiene</span>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- PULMONARY -->
+        <section class="system-section">
+            <div class="system-header">
+                <span class="system-title">Pulmonary</span>
+            </div>
+            <div class="system-body">
+                <div class="prompt-list">
+                    <div class="prompt-item"><span class="call-tag">NURSING:</span><span class="response-text">Respiratory concerns?</span></div>
+                    <div class="prompt-item"><span class="call-tag">RT:</span><span class="response-text">Status update?</span></div>
+                </div>
+                <div class="quality-indicators-title">Quality Indicators</div>
+                <div class="checkbox-container">
+                    <div class="checkbox-label" style="padding-left:0;">
+                        SBT / ERT:
+                        <span class="nested-group">
+                            <span class="nested-item"><input type="checkbox"> Pass</span>
+                            <span class="nested-item"><input type="checkbox"> Fail</span>
+                            <span class="nested-item"><input type="checkbox"> Deferred</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CARDIOVASCULAR -->
+        <section class="system-section">
+            <div class="system-header">
+                <span class="system-title">Cardiovascular</span>
+            </div>
+            <div class="system-body">
+                <div class="prompt-list">
+                    <div class="prompt-item"><span class="call-tag">NURSING:</span><span class="response-text">Hemodynamics?</span></div>
+                    <div class="prompt-item"><span class="call-tag">PHARMACY:</span><span class="response-text">Active infusions?</span></div>
+                </div>
+                <div class="quality-indicators-title">Quality Indicators</div>
+                <div class="checkbox-container">
+                    <label class="checkbox-item">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        <span class="checkbox-label">Arterial line</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        <span class="checkbox-label">Central line</span>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- GASTROINTESTINAL -->
+        <section class="system-section">
+            <div class="system-header">
+                <span class="system-title">Gastrointestinal</span>
+            </div>
+            <div class="system-body">
+                <div class="prompt-list">
+                    <div class="prompt-item"><span class="call-tag">NURSING:</span><span class="response-text">Enteral intake/output?</span></div>
+                    <div class="prompt-item"><span class="call-tag">NUTRITION:</span><span class="response-text">Recommendations?</span></div>
+                    <div class="prompt-item"><span class="call-tag">PHARMACY:</span><span class="response-text">Prophylaxis?</span></div>
+                </div>
+                <div class="quality-indicators-title">Quality Indicators</div>
+                <div class="checkbox-container">
+                    <label class="checkbox-item">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        <span class="checkbox-label">G.I. prophylaxis</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        <span class="checkbox-label">Bowel regimen</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        <span class="checkbox-label">PO days</span>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEPHROLOGY -->
+        <section class="system-section">
+            <div class="system-header">
+                <span class="system-title">Nephrology</span>
+            </div>
+            <div class="system-body">
+                <div class="prompt-list">
+                    <div class="prompt-item"><span class="call-tag">NURSING:</span><span class="response-text">UOP (cc/kg/hr)?</span></div>
+                    <div class="prompt-item"><span class="call-tag">PHARMACY:</span><span class="response-text">Electrolyte concerns?</span></div>
+                    <div class="prompt-item"><span class="call-tag">PHARMACY:</span><span class="response-text">Renal dose recommendations?</span></div>
+                </div>
+                <div class="quality-indicators-title">Quality Indicators</div>
+                <div class="checkbox-container">
+                    <label class="checkbox-item">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        <span class="checkbox-label">Foley catheter</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        <span class="checkbox-label">Acid/base balance</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        <span class="checkbox-label">Electrolytic disarray</span>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- ENDOCRINE -->
+        <section class="system-section">
+            <div class="system-header">
+                <span class="system-title">Endocrine</span>
+            </div>
+            <div class="system-body">
+                <div class="prompt-list">
+                    <div class="prompt-item"><span class="call-tag">NURSING:</span><span class="response-text">Glucose trends?</span></div>
+                    <div class="prompt-item"><span class="call-tag">PHARMACY:</span><span class="response-text">Insulin / dextrose?</span></div>
+                    <div class="prompt-item"><span class="call-tag">PHARMACY:</span><span class="response-text">Steroids / thyroids?</span></div>
+                </div>
+                <div class="quality-indicators-title">Quality Indicators</div>
+                <div class="checkbox-container">
+                    <label class="checkbox-item">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        <span class="checkbox-label">Hypoglycemia (past 24h)</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        <span class="checkbox-label">Hyperglycemia (past 24h)</span>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- HEMATOLOGY -->
+        <section class="system-section">
+            <div class="system-header">
+                <span class="system-title">Hematology</span>
+            </div>
+            <div class="system-body">
+                <div class="prompt-list">
+                    <div class="prompt-item"><span class="call-tag">NURSING:</span><span class="response-text">Bleeding?</span></div>
+                    <div class="prompt-item"><span class="call-tag">PHARMACY:</span><span class="response-text">Blood products?</span></div>
+                </div>
+                <div class="quality-indicators-title">Quality Indicators</div>
+                <div class="checkbox-container">
+                    <label class="checkbox-item">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        <span class="checkbox-label">VTE prophylaxis</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        <span class="checkbox-label">Blood consent</span>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- MUSCULOSKELETAL -->
+        <section class="system-section">
+            <div class="system-header">
+                <span class="system-title">Musculoskeletal</span>
+            </div>
+            <div class="system-body">
+                <div class="prompt-list">
+                    <div class="prompt-item"><span class="call-tag">NURSING:</span><span class="response-text">Wounds / Mobility?</span></div>
+                    <div class="prompt-item"><span class="call-tag">NURSING:</span><span class="response-text">Orthopedic concerns?</span></div>
+                </div>
+                <div class="quality-indicators-title">Quality Indicators</div>
+                <div class="checkbox-container">
+                    <label class="checkbox-item">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        <span class="checkbox-label">Mobility</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        <span class="checkbox-label">Restraints</span>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- INFECTIOUS DISEASE -->
+        <section class="system-section">
+            <div class="system-header">
+                <span class="system-title">Infectious Disease</span>
+            </div>
+            <div class="system-body">
+                <div class="prompt-list">
+                    <div class="prompt-item"><span class="call-tag">NURSING:</span><span class="response-text">Infectious concerns?</span></div>
+                    <div class="prompt-item"><span class="call-tag">PHARMACY:</span><span class="response-text">Antimicrobials updates?</span></div>
+                </div>
+                <div class="quality-indicators-title">Quality Indicators</div>
+                <div class="checkbox-container">
+                    <label class="checkbox-item">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        <span class="checkbox-label">Abx stewardship</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        <span class="checkbox-label">Review cultures</span>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- SURGERY/TRAUMA -->
+        <section class="system-section">
+            <div class="system-header">
+                <span class="system-title">Surgery / Trauma</span>
+            </div>
+            <div class="system-body">
+                <div class="prompt-list">
+                    <div class="prompt-item"><span class="call-tag">NURSING:</span><span class="response-text">Operative plans?</span></div>
+                    <div class="prompt-item"><span class="call-tag">PHARMACY:</span><span class="response-text">MAR holds?</span></div>
+                </div>
+                <div class="quality-indicators-title">Quality Indicators</div>
+                <div class="checkbox-container">
+                    <label class="checkbox-item">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        <span class="checkbox-label">Surgeon's daily update</span>
+                    </label>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Operational Disposition Footer -->
+    <section class="disposition-section">
+        <div class="disp-block">
+            <label class="section-component-title">Disposition Planning</label>
+            <div class="checkbox-container">
+                <label class="checkbox-item">
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                    <span class="checkbox-label">Case mgmt: LOS and DC barriers?</span>
+                </label>
+                <label class="checkbox-item">
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                    <span class="checkbox-label">Nursing: DG barriers?</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="action-footer">
+            <button class="btn btn-primary" onclick="clearActiveMatrix()">Clear Checklist</button>
+        </div>
+
+        <div class="qa-footer">
+            [Confidential quality assurance document]
+        </div>
+    </section>
+</div>
+
+<script>
+    function clearActiveMatrix() {
+        if (confirm("Reset tracking checklist matrix? All current selections will be cleared.")) {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(cb => cb.checked = false);
+
+            const radios = document.querySelectorAll('input[type="radio"]');
+            radios.forEach(r => r.checked = false);
+        }
+    }
+</script>
+
+</body>
+</html>
