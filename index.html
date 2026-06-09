@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KubarkULTRA | Medical Education Repository</title>
+    <title>ResusLogix | Annex</title>
     <style>
         /* ResusLogix Premium Unified Design System */
         :root {
@@ -598,33 +598,23 @@
 </head>
 <body>
 
+    <!-- Unified Navigation Bar Framework -->
     <nav>
         <div class="nav-container">
-            <a class="nav-logo" href="#" onclick="switchView('home')">KubarkULTRA</a>
+            <a class="nav-logo" href="#" onclick="switchView('tools')">ResusLogix | Annex</a>
             <div class="nav-links">
-                <a href="#" id="nav-home" onclick="switchView('home')">Home</a>
-                <a href="https://www.resuslogix.com" target="_blank">ResusLogix</a>
+                <a href="https://www.resuslogix.com" target="_blank">ResusLogix.com</a>
             </div>
         </div>
     </nav>
 
-    <main id="view-home" class="view-pane active-pane">
-        <div class="pre-header">Operational Medicine Hub</div>
-        <h1>KubarkULTRA Platform</h1>
-        <p class="lead-text">Clinical decision support infrastructure, high-acuity utilities, and medical education repositories optimized for deployment environments.</p>
-        
-        <div style="margin-top: 40px; padding: 24px; border: 1px solid var(--border-light); border-radius: var(--radius); max-width: 500px;">
-            <h3 style="font-size: 16px; margin-bottom: 8px;">Access Application Architecture</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">Navigate directly to the verified clinical index list to deploy active modules or calculation configurations.</p>
-            <button class="btn" style="width: auto; padding: 10px 20px; background-color: var(--text-main); color: var(--bg-color); border: none;" onclick="switchView('tools')">Go to Tools Repository →</button>
-        </div>
-    </main>
+    <!-- VIEW 1: TOOLS MATRIX INTERFACE (Main Dashboard Window Opening Directly) -->
+    <main id="view-tools" class="view-pane active-pane">
 
-    <main id="view-tools" class="view-pane">
-        <div class="pre-header">AUSTERE & HIGH-ACUITY OPERATIONS REPOSITORY</div>
-        <h1>KubarkULTRA</h1>
-        <p class="lead-text">Operational medicine decision support, calculators, and deployment checklists designed for edge, resource-constrained, and high-stress environments.</p>
+        <h3>RESOURCES</h3>
+        <p class="lead-text">Operational medicine decision support and deployment checklists.</p>
 
+        <!-- Matrix Controls Bar -->
         <div class="controls-bar">
             <input type="text" class="search-input" placeholder="Filter tools, checklists, and modules...">
             <div style="display:flex; gap:8px;">
@@ -633,28 +623,32 @@
             </div>
         </div>
 
+        <!-- Cards Manifest Matrix -->
         <div class="directory-grid">
             
+            <!-- Intensive Care Rounding Checklist Card -->
             <div class="matrix-card">
                 <div>
                     <span class="card-meta-tag tag-checklist">Operational Checklist</span>
                     <h2>Intensive Care Rounding Matrix</h2>
-                    <p>A specialized call-and-response clinical checklist organized into concise structured actions for multi-system high-acuity rounds execution.</p>
+                    <p>Call-and-response clinical tool organized into concise structured actions for multi-system high-acuity rounds execution.</p>
                 </div>
                 <span class="action-link" onclick="switchView('rounding-tool')">Open Tool →</span>
             </div>
 
+            <!-- DASH-1A Checklist Card -->
             <div class="matrix-card">
                 <div>
                     <span class="card-meta-tag tag-checklist">Operational Checklist</span>
                     <h2>DASH-1A Checklist</h2>
-                    <p>A high-reliability checklist using a call and response model to optimize patient physiology pre-intubation and ensure post-intubation mission-critical parameters are not overlooked.</p>
+                    <p>Call-and-response checklist to reduce peri-intubation decompensation and ensure mission-critical post-intubation elements are completed.</p>
                 </div>
                 <span class="action-link" onclick="switchView('edu-tool')">Open Checklist →</span>
             </div>
         </div>
     </main>
 
+    <!-- VIEW 2: ACTIVE CHECKLIST VIEW INTERFACE -->
     <main id="view-rounding-tool" class="view-pane">
         <div class="checklist-container">
             <header class="checklist-header">
@@ -662,6 +656,7 @@
             </header>
             <div class="checklist-subtitle">Call-and-Response Format</div>
 
+            <!-- Context Processing Demographics -->
             <section class="context-stack">
                 <div class="static-box">
                     <span class="section-component-title">Patient Identifier</span>
@@ -671,6 +666,7 @@
                 </div>
             </section>
 
+            <!-- Code Status Component -->
             <section class="code-status-container">
                 <div class="code-status-title section-component-title">Code Status</div>
                 <div class="code-status-options">
@@ -696,7 +692,9 @@
                 </div>
             </section>
 
+            <!-- Systems Elements Manifest -->
             <main>
+                <!-- NEUROLOGIC -->
                 <div class="system-section">
                     <div class="system-header"><span class="system-title">Neurologic</span></div>
                     <div class="system-body">
@@ -713,6 +711,7 @@
                     </div>
                 </div>
 
+                <!-- PULMONARY -->
                 <div class="system-section">
                     <div class="system-header"><span class="system-title">Pulmonary</span></div>
                     <div class="system-body">
@@ -734,6 +733,7 @@
                     </div>
                 </div>
 
+                <!-- CARDIOVASCULAR -->
                 <div class="system-section">
                     <div class="system-header"><span class="system-title">Cardiovascular</span></div>
                     <div class="system-body">
@@ -749,6 +749,7 @@
                     </div>
                 </div>
 
+                <!-- GASTROINTESTINAL -->
                 <div class="system-section">
                     <div class="system-header"><span class="system-title">Gastrointestinal</span></div>
                     <div class="system-body">
@@ -766,6 +767,7 @@
                     </div>
                 </div>
 
+                <!-- NEPHROLOGY -->
                 <div class="system-section">
                     <div class="system-header"><span class="system-title">Nephrology</span></div>
                     <div class="system-body">
@@ -783,6 +785,7 @@
                     </div>
                 </div>
 
+                <!-- ENDOCRINE -->
                 <div class="system-section">
                     <div class="system-header"><span class="system-title">Endocrine</span></div>
                     <div class="system-body">
@@ -799,6 +802,7 @@
                     </div>
                 </div>
 
+                <!-- HEMATOLOGY -->
                 <div class="system-section">
                     <div class="system-header"><span class="system-title">Hematology</span></div>
                     <div class="system-body">
@@ -814,6 +818,7 @@
                     </div>
                 </div>
 
+                <!-- MUSCULOSKELETAL -->
                 <div class="system-section">
                     <div class="system-header"><span class="system-title">Musculoskeletal</span></div>
                     <div class="system-body">
@@ -829,6 +834,7 @@
                     </div>
                 </div>
 
+                <!-- INFECTIOUS DISEASE -->
                 <div class="system-section">
                     <div class="system-header"><span class="system-title">Infectious Disease</span></div>
                     <div class="system-body">
@@ -844,6 +850,7 @@
                     </div>
                 </div>
 
+                <!-- SURGERY/TRAUMA -->
                 <div class="system-section">
                     <div class="system-header"><span class="system-title">Surgery / Trauma</span></div>
                     <div class="system-body">
@@ -859,6 +866,7 @@
                 </div>
             </main>
 
+            <!-- Final Verification Modules -->
             <section class="disposition-section">
                 <div class="disp-block">
                     <label class="section-component-title">Disposition Planning</label>
@@ -868,6 +876,7 @@
                     </div>
                 </div>
 
+                <!-- Balanced Action Matrix Interface Footers -->
                 <div class="action-footer">
                     <button class="btn" onclick="clearActiveMatrix()">Close Matrix</button>
                     <button class="btn" onclick="switchView('tools')">Back to Tools Repository</button>
@@ -880,6 +889,7 @@
         </div>
     </main>
 
+    <!-- VIEW 3: INTERACTIVE DASH1A EDUCATION ENGINE MODULE -->
     <main id="view-edu-tool" class="view-pane">
         <div class="module-container">
             <header class="module-header">
@@ -887,6 +897,7 @@
             </header>
             <div class="module-subtitle">Interactive Decision Support Module</div>
 
+            <!-- Input Matrix Grid -->
             <section class="dash-grid">
                 <div class="dash-input-group">
                     <label for="injury-mechanism">Mechanism of Injury</label>
@@ -918,6 +929,7 @@
                 </div>
             </section>
 
+            <!-- Dynamic Decision Matrix Output Box -->
             <section class="dash-output-box">
                 <h3>Calculated Operational Directives</h3>
                 
@@ -942,6 +954,7 @@
                 </div>
             </section>
 
+            <!-- Dynamic Balanced Action Interface Footers -->
             <footer class="action-footer">
                 <button class="btn" onclick="resetDashModule()">Close Matrix</button>
                 <button class="btn" onclick="switchView('tools')">Back to Tools Repository</button>
@@ -959,7 +972,7 @@
             parseHashRouting();
         });
 
-        // Event detection hook for seamless toggle changes across top menu anchors
+        // Toggle capture tracking layers across system hashes
         window.addEventListener('hashchange', () => {
             parseHashRouting();
         });
@@ -970,10 +983,8 @@
                 switchView('rounding-tool');
             } else if (currentHash === '#view-edu-tool' || currentHash === '#dash1a') {
                 switchView('edu-tool');
-            } else if (currentHash === '#tools' || currentHash === '#view-tools') {
-                switchView('tools');
             } else {
-                switchView('home');
+                switchView('tools');
             }
         }
 
@@ -986,12 +997,9 @@
                 link.classList.remove('active');
             });
 
-            if(viewName === 'home') {
-                document.getElementById('view-home').classList.add('active-pane');
-                document.getElementById('nav-home').classList.add('active');
-                if(window.location.hash !== '#home') window.location.hash = 'home';
-            } else if (viewName === 'tools') {
+            if (viewName === 'tools') {
                 document.getElementById('view-tools').classList.add('active-pane');
+                document.getElementById('nav-tools').classList.add('active');
                 if(window.location.hash !== '#view-tools') window.location.hash = 'view-tools';
             } else if (viewName === 'rounding-tool') {
                 document.getElementById('view-rounding-tool').classList.add('active-pane');
