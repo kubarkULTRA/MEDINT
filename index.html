@@ -124,17 +124,12 @@
 
         /* UI Filter Controls Bar */
         .controls-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 16px;
             margin-bottom: 32px;
-            flex-wrap: wrap;
+            width: 100%;
         }
 
         .search-input {
-            flex: 1;
-            min-width: 280px;
+            width: 100%;
             max-width: 400px;
             border: 1px solid var(--border-light);
             border-radius: var(--radius);
@@ -149,13 +144,60 @@
             border-color: var(--accent-blue);
         }
 
-        /* Matrix Card Layout Engine */
-        .directory-grid {
+        /* Three Column Layout Grid Engine */
+        .repository-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 24px;
+            grid-template-columns: 1fr;
+            gap: 32px;
+            align-items: start;
         }
 
+        @media (min-width: 992px) {
+            .repository-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .repo-column {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .repo-column-header {
+            border-bottom: 2px solid var(--text-main);
+            padding-bottom: 8px;
+            margin-bottom: 8px;
+        }
+
+        .repo-column-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: -0.3px;
+        }
+
+        .repo-column-subtitle {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 2px;
+        }
+
+        .placeholder-note {
+            font-size: 13px;
+            font-style: italic;
+            color: var(--text-muted);
+            padding: 16px;
+            border: 1px dashed var(--border-light);
+            border-radius: var(--radius);
+            text-align: center;
+            background-color: var(--bg-card);
+        }
+
+        /* Matrix Card Layout Engine (Flexbox ensures uniform inner alignment) */
         .matrix-card {
             border: 1px solid var(--border-light);
             border-radius: var(--radius);
@@ -164,11 +206,19 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            min-height: 220px; /* Base height baseline requirement across deployment matrices */
+            height: 100%;       /* Fluid container filling for CSS Grid row distributions */
             transition: border-color 0.15s ease;
         }
 
         .matrix-card:hover {
             border-color: var(--accent-blue);
+        }
+
+        .card-body-content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
         }
 
         .card-meta-tag {
@@ -198,7 +248,7 @@
             color: var(--text-muted);
             line-height: 1.4;
             margin-bottom: 24px;
-            flex-grow: 1;
+            flex-grow: 1; /* Pushes the actions link precisely to the baseline */
         }
 
         .action-link {
@@ -209,6 +259,7 @@
             display: inline-flex;
             align-items: center;
             cursor: pointer;
+            margin-top: auto; /* Hard anchors alignment configuration */
         }
 
         /* Checklist Formatting Wrapper Modules */
@@ -614,37 +665,60 @@
         <h3>RESOURCES</h3>
         <p class="lead-text">Operational medicine decision support and deployment checklists.</p>
 
-        <!-- Matrix Controls Bar -->
+        <!-- Search Input Bar -->
         <div class="controls-bar">
             <input type="text" class="search-input" placeholder="Filter tools, checklists, and modules...">
-            <div style="display:flex; gap:8px;">
-                <button class="btn" style="padding: 10px 16px; width: auto;">Jump to Directory</button>
-                <button class="btn" style="padding: 10px 16px; width: auto; background-color: var(--text-main); color: var(--bg-color); border: none;">Reload Matrix</button>
-            </div>
         </div>
 
-        <!-- Cards Manifest Matrix -->
-        <div class="directory-grid">
+        <!-- Split Three-Column Layout Framework -->
+        <div class="repository-grid">
             
-            <!-- Intensive Care Rounding Checklist Card -->
-            <div class="matrix-card">
-                <div>
-                    <span class="card-meta-tag tag-checklist">Operational Checklist</span>
-                    <h2>Intensive Care Rounding Matrix</h2>
-                    <p>Call-and-response clinical tool organized into concise structured actions for multi-system high-acuity rounds execution.</p>
+            <!-- COLUMN 1: MEDED -->
+            <section class="repo-column" id="col-meded">
+                <div class="repo-column-header">
+                    <div class="repo-column-title">MEDED</div>
+                    <div class="repo-column-subtitle">Medical Education</div>
                 </div>
-                <span class="action-link" onclick="switchView('rounding-tool')">Open Tool →</span>
-            </div>
+                <div class="placeholder-note">No assets uploaded. Items pending verification.</div>
+            </section>
 
-            <!-- DASH-1A Checklist Card -->
-            <div class="matrix-card">
-                <div>
-                    <span class="card-meta-tag tag-checklist">Operational Checklist</span>
-                    <h2>DASH-1A Checklist</h2>
-                    <p>Call-and-response checklist to reduce peri-intubation decompensation and ensure mission-critical post-intubation elements are completed.</p>
+            <!-- COLUMN 2: OPSEC -->
+            <section class="repo-column" id="col-opsec">
+                <div class="repo-column-header">
+                    <div class="repo-column-title">OPSEC</div>
+                    <div class="repo-column-subtitle">Operational Security</div>
                 </div>
-                <span class="action-link" onclick="switchView('edu-tool')">Open Checklist →</span>
-            </div>
+                
+                <!-- Intensive Care Rounding Checklist Card -->
+                <div class="matrix-card">
+                    <div class="card-body-content">
+                        <span class="card-meta-tag tag-checklist">Operational Checklist</span>
+                        <h2>Intensive Care Rounding Matrix</h2>
+                        <p>Call-and-response clinical tool organized into concise structured actions for multi-system high-acuity rounds execution.</p>
+                    </div>
+                    <span class="action-link" onclick="switchView('rounding-tool')">Open Tool →</span>
+                </div>
+
+                <!-- DASH-1A Checklist Card -->
+                <div class="matrix-card">
+                    <div class="card-body-content">
+                        <span class="card-meta-tag tag-checklist">Operational Checklist</span>
+                        <h2>DASH-1A Checklist</h2>
+                        <p>Call-and-response checklist to reduce peri-intubation decompensation and ensure mission-critical post-intubation elements are completed.</p>
+                    </div>
+                    <span class="action-link" onclick="switchView('edu-tool')">Open Checklist →</span>
+                </div>
+            </section>
+
+            <!-- COLUMN 3: HUMINT -->
+            <section class="repo-column" id="col-humint">
+                <div class="repo-column-header">
+                    <div class="repo-column-title">HUMINT</div>
+                    <div class="repo-column-subtitle">Human Intelligence</div>
+                </div>
+                <div class="placeholder-note">No assets uploaded. Items pending verification.</div>
+            </section>
+
         </div>
     </main>
 
